@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stone Paper Scissors - Pixel Edition</title>
+    <!-- Link to external CSS file -->
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <h1>Stone Paper Scissors</h1>
+    
+    <div class="score-container">
+        <div class="score">
+            <span>You: </span>
+            <span id="user-score">0</span>
+        </div>
+        <div class="score">
+            <span>Computer: </span>
+            <span id="computer-score">0</span>
+        </div>
+    </div>
+
+    <div class="pick-me">
+        <button onclick="UserChoice('Stone')">Stone</button>
+        <button onclick="UserChoice('Paper')">Paper</button>
+        <button onclick="UserChoice('Scissors')">Scissors</button>
+    </div>
+
+    <div id="result"></div>
+    <div id="winner"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
