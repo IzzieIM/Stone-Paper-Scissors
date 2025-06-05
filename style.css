@@ -1,103 +1,165 @@
-@import url('https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap');
+/* Modern UI */
+
+:root {
+    --primary-color: #007bff;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --danger-color: #dc3545;
+    --warning-color: #ffc107;
+    --info-color: #17a2b8;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --background-color: #e9ecef;
+    --card-background: #ffffff;
+    --border-color: #dee2e6;
+    --box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+    --border-radius: 0.25rem;
+}
 
 body {
-    background-color: #2c3e50;
-    font-family: 'Press Start 2P', cursive;
-    color: #ecf0f1;
+    font-family: 'Arial', sans-serif; /* Modern font */
+    background-color: var(--background-color);
+    color: var(--dark-color);
     text-align: center;
     padding: 20px;
     line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 100vh;
 }
 
 h1 {
-    color: #e74c3c;
-    text-shadow: 3px 3px 0 #000;
+    color: var(--primary-color);
     margin-bottom: 40px;
     font-size: 2.5em;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+
+.score-container {
+    display: flex;
+    justify-content: center;
+    gap: 30px; /* Reduced gap */
+    margin: 20px 0;
+    font-size: 1.1em; /* Slightly smaller font */
+    background-color: var(--card-background);
+    padding: 15px 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+}
+
+.score {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.score span:first-child {
+    font-weight: bold;
+    margin-bottom: 5px;
+    color: var(--secondary-color);
+}
+
+.score span:last-child {
+    font-size: 1.5em;
+    color: var(--primary-color);
 }
 
 .pick-me {
     display: flex;
     justify-content: center;
-    gap: 20px;
+    gap: 15px; /* Reduced gap */
     margin: 30px 0;
 }
 
 button {
-    background-color: #3498db;
-    border: 4px solid #2980b9;
-    color: white;
-    padding: 15px 30px;
-    font-family: 'Press Start 2P', cursive;
+    background-color: var(--light-color);
+    border: 1px solid var(--border-color);
+    color: var(--dark-color);
+    padding: 12px 25px; /* Adjusted padding */
+    font-family: 'Arial', sans-serif;
     font-size: 1em;
     cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    overflow: hidden;
+    transition: all 0.3s ease; /* Smooth transition */
+    border-radius: var(--border-radius);
+    display: flex; /* Align icon and text */
+    align-items: center;
+    gap: 8px; /* Space between icon and text */
 }
 
 button:hover {
-    transform: scale(1.1);
-    background-color: #2980b9;
+    background-color: var(--primary-color);
+    color: var(--light-color);
+    border-color: var(--primary-color);
+    box-shadow: var(--box-shadow);
 }
 
 button:active {
-    transform: scale(0.95);
+    transform: scale(0.98); /* Slight press effect */
+}
+
+/* Remove pixel art icon styling */
+button[onclick*="Stone"]::before,
+button[onclick*="Paper"]::before,
+button[onclick*="Scissors"]::before {
+    content: none;
+    margin-right: 0;
+}
+
+/* Add modern icons */
+button[onclick*="Stone"]::before {
+     content: "🪨"; /* Keep emojis for now, can replace with images later */
+}
+
+button[onclick*="Paper"]::before {
+     content: "📄";
+}
+
+button[onclick*="Scissors"]::before {
+     content: "✂️";
 }
 
 #result, #winner {
     margin: 20px 0;
     padding: 15px;
-    background-color: rgba(0, 0, 0, 0.3);
-    border: 3px solid #ecf0f1;
-    border-radius: 5px;
+    background-color: var(--card-background);
+    border: 1px solid var(--border-color);
+    border-radius: var(--border-radius);
     font-size: 1.2em;
+    min-height: 1.2em; /* Ensure consistent height */
+    color: var(--dark-color);
 }
 
-/* Pixel art icons for the choices */
-button[onclick*="Stone"]::before {
-    content: "🪨";
-    margin-right: 10px;
-}
-
-button[onclick*="Paper"]::before {
-    content: "📄";
-    margin-right: 10px;
-}
-
-button[onclick*="Scissors"]::before {
-    content: "✂️";
-    margin-right: 10px;
-}
-
-/* Animation for the result */
-@keyframes pixelate {
-    0% { transform: scale(1); }
-    50% { transform: scale(1.1); }
-    100% { transform: scale(1); }
+/* Simple fade-in animation for results */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
 }
 
 #result, #winner {
-    animation: pixelate 0.5s ease;
+    animation: fadeIn 0.5s ease-out;
 }
 
-/* Hidden class for elements that should be hidden */
+/* Style for winner text */
+#winner {
+    font-weight: bold;
+    color: var(--success-color); /* Default to success */
+}
+
+/* Specific winner colors */
+#winner:contains("You") {
+    color: var(--success-color);
+}
+
+#winner:contains("Computer") {
+    color: var(--danger-color);
+}
+
+#winner:contains("None") {
+    color: var(--secondary-color);
+}
+
 .hidden {
     display: none;
-}
-
-/* Score display */
-.score-container {
-    display: flex;
-    justify-content: center;
-    gap: 40px;
-    margin: 20px 0;
-    font-size: 1.2em;
-}
-
-.score {
-    background-color: rgba(0, 0, 0, 0.3);
-    padding: 10px 20px;
-    border: 2px solid #ecf0f1;
-    border-radius: 5px;
 }
